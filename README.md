@@ -46,7 +46,12 @@ Default output files:
 - Slave: `events_slave.raw`
 - Master: `events_master.raw`
 
-Both are recorded in EVT3 format.
+Both outputs are recorded as RAW event files.
+
+EVT3 note:
+
+- On HAL versions that provide `metavision/hal/device/device_config.h`, the program explicitly requests EVT3.
+- On HAL versions that do not provide this header, the program falls back to the compatible open API and records with the device/SDK default format (typically EVT3 on GenX320 setups).
 
 To stop recording, press Ctrl-C in each terminal.
 

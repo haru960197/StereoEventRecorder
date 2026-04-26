@@ -9,7 +9,12 @@
 #include <thread>
 
 #include <metavision/hal/device/device.h>
+#if __has_include(<metavision/hal/device/device_config.h>)
 #include <metavision/hal/device/device_config.h>
+#define HAS_HAL_DEVICE_CONFIG 1
+#else
+#define HAS_HAL_DEVICE_CONFIG 0
+#endif
 #include <metavision/hal/device/device_discovery.h>
 #include <metavision/hal/facilities/i_camera_synchronization.h>
 #include <metavision/hal/facilities/i_event_decoder.h>
@@ -97,15 +102,25 @@ int main(int argc, char *argv[]) {
 
 	try {
 		std::cout << "Opening camera..." << std::endl;
+
+		std::unique_ptr<Metavision::Device> device;
+
+#if HAS_HAL_DEVICE_CONFIG
 		Metavision::DeviceConfig config;
 		config.set_format("EVT3");
 
-		std::unique_ptr<Metavision::Device> device;
 		if (options.serial.empty()) {
 			device = Metavision::DeviceDiscovery::open("", config);
 		} else {
 			device = Metavision::DeviceDiscovery::open(options.serial, config);
 		}
+#else
+		if (options.serial.empty()) {
+			device = Metavision::DeviceDiscovery::open("");
+		} else {
+			device = Metavision::DeviceDiscovery::open(options.serial);
+		}
+#endif
 
 		if (!device) {
 			std::cerr << "Camera opening failed." << std::endl;

@@ -8,6 +8,6 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(MetavisionHAL REQUIRED)
 find_package(Threads REQUIRED)
 
-add_executable(metavision_hal_sync main.cpp)
+add_executable(stereo_event_recorder main.cpp)
 
-target_link_libraries(metavision_hal_sync PRIVATE Metavision::HAL_discovery Threads::Threads)
+target_link_libraries(stereo_event_recorder PRIVATE Metavision::HAL_discovery Threads::Threads)

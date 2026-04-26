@@ -23,22 +23,22 @@ Start the slave camera first, then start the master camera.
 
 ```bash
 # Terminal 1 (slave)
-./metavision_hal_sync --slave
+./stereo_event_recorder --slave
 
 # Terminal 2 (master)
-./metavision_hal_sync --master
+./stereo_event_recorder --master
 ```
 
 Optional arguments:
 
 ```bash
 # specify serial
-./metavision_hal_sync --slave --serial <slave_serial>
-./metavision_hal_sync --master --serial <master_serial>
+./stereo_event_recorder --slave --serial <slave_serial>
+./stereo_event_recorder --master --serial <master_serial>
 
 # specify output RAW path
-./metavision_hal_sync --slave --output-raw-file slave.raw
-./metavision_hal_sync --master --output-raw-file master.raw
+./stereo_event_recorder --slave --output-raw-file slave.raw
+./stereo_event_recorder --master --output-raw-file master.raw
 ```
 
 Default output files:
